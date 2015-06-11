@@ -1,0 +1,12 @@
+{
+  // docdoor  module configs
+  "docdoor": {
+    "word": {
+      "app": "open -W ",
+      "temp": "/Users/boris/docdoor_files/"
+    },
+    "server": {
+      "url": "http://localhost:8000/producta/files"
+    }
+  }
+}
