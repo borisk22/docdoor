@@ -1,7 +1,8 @@
 var exec = require('child_process').exec;
 var config = require('config');
 var fs=require('fs');
-var request=require('request')
+var request=require('request');
+var os=require('os');
 
 // var word = config.get('docdoor.word');
 // var client = config.get('docdoor.client');
@@ -14,6 +15,14 @@ var express = require('express'),
 
 var user="";
 var token="";
+var isWin = /^win/.test(process.platform);
+var temp="";
+if (isWin) {
+	temp="c:\\temp\\";  // TODO check on windows os.tmpdir()
+} else {
+	// TODO later temp=os.tmpdir();
+	temp="/Users/boris/temp/";
+}
 
 // send content from fileNameFull as fileName, to file under id
 function sendFile(fileNameFull, fileName,  id){
@@ -32,11 +41,10 @@ function sendFile(fileNameFull, fileName,  id){
 }
 
 // get template from fileId and save it as id.doc
-function getFile(fileId, id, callback){
+function getFile(fileId, fileName, callback){
 	var endPoint="http://localhost:8000/producta/files/"+fileId+"?x_key="+user+"&access_token="+token; // not realy needed TODO check server side
-	var fileName=id+".doc";
-	var fileNameFull= "c:\\temp\\"+fileName;    // word.temp+fileName;
-console.log(endPoint);
+	//var fileName=id+".doc";
+	var fileNameFull= temp+fileName+".doc";    // word.temp+fileName;
 	var destination = fs.createWriteStream(fileNameFull);
 	var req = request(endPoint).pipe(destination).on('error', function (err) {
 		if (err) {
@@ -82,13 +90,19 @@ var desc=JSON.parse(fs.readFileSync(fileNameDod, 'utf8'));
 user=desc.username;
 token=desc.token;
 value=desc.value
+console.log(desc);
 // desc.fileId - id of temaplte, desc._id id of dod future document fila
 // callback give us full name with and without path
-getFile(desc.fileId, desc._id, function(fileNameFull, fileName){
-	var isWin = /^win/.test(process.platform);
+getFile(desc.fileId, desc.fileName, function(fileNameFull, fileName){
+	
 	if (isWin) { // For now only on windows arhitecture 
-console.log(value);
 		winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName);
+	} else {
+		var startLine2= 'open -W '+fileNameFull;  //word.app+" "+fileNameFull;
+		exec(startLine2, function callback(error, stdout, stderr){
+		    console.log("Editing done! Sending file back to server!");
+		    sendFile(fileNameFull, fileName, desc._id );
+		});
 	}
 })
 
