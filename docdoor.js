@@ -13,6 +13,7 @@ var express = require('express'),
     multer  = require('multer'), 
     app = express();
 
+var serverHost="";
 var user="";
 var token="";
 var isWin = /^win/.test(process.platform);
@@ -26,7 +27,7 @@ if (isWin) {
 
 // send content from fileNameFull as fileName, to file under id
 function sendFile(fileNameFull, fileName,  id){
-	var endPoint="http://localhost:8000/producta/files/"+id; // not realy needed TODO check server side
+	var endPoint="http://"+serverHost+":8000/producta/files/"+id; // not realy needed TODO check server side
 	var req = request.post({url: endPoint, headers:{"x-key":user, "x-access-token":token }},  function (err, resp, body) {
 		if (err) {
 			console.log('Error!:');
@@ -42,7 +43,7 @@ function sendFile(fileNameFull, fileName,  id){
 
 // get template from fileId and save it as id.doc
 function getFile(fileId, fileName, callback){
-	var endPoint="http://localhost:8000/producta/files/"+fileId+"?x_key="+user+"&access_token="+token; // not realy needed TODO check server side
+	var endPoint="http://"+serverHost+":8000/producta/files/"+fileId+"?x_key="+user+"&access_token="+token; // not realy needed TODO check server side
 	//var fileName=id+".doc";
 	var fileNameFull= temp+fileName+".doc";    // word.temp+fileName;
 	var destination = fs.createWriteStream(fileNameFull);
@@ -55,15 +56,6 @@ function getFile(fileId, fileName, callback){
 			console.log("The file "+fileNameFull+" was saved!");
 			callback(fileNameFull, fileName);
 	});
-}
-
-var fileNameDod;
-if (process.argv[1].toUpperCase().indexOf(".DOD")>0) {
-	fileNameDod=process.argv[1];
-} else if (process.argv[2].toUpperCase().indexOf(".DOD")>0){
-	fileNameDod=process.argv[2];
-} else {
-	//exit
 }
 
 function winWordBookmarks(fileNameFull, value, keysList, idx, fileName){
@@ -79,28 +71,39 @@ function winWordBookmarks(fileNameFull, value, keysList, idx, fileName){
 	} else {
 		var startLine2= 'start/w '+fileNameFull;  //word.app+" "+fileNameFull;
 		exec(startLine2, function callback(error, stdout, stderr){
-		    console.log("Editing done! Sending file back to server!");
+		    process.stdout.write("Editing done! Sending file back to server!");
 		    sendFile(fileNameFull, fileName, desc._id );
 		});
 	}
 	// done
 }
 
+var fileNameDod;
+if (process.argv[1] && process.argv[1].toUpperCase().indexOf(".DOD")>0) {
+	fileNameDod=process.argv[1];
+} else if (process.argv[2] && process.argv[2].toUpperCase().indexOf(".DOD")>0){
+	fileNameDod=process.argv[2];
+} else {
+	//exit
+	process.stdout.write('Nothing to do!' + '\n');
+	process.exit(0);
+}
+
 var desc=JSON.parse(fs.readFileSync(fileNameDod, 'utf8'));
 user=desc.username;
 token=desc.token;
 value=desc.value
-console.log(desc);
+serverHost=desc.host;
+console.log(serverHost);
 // desc.fileId - id of temaplte, desc._id id of dod future document fila
 // callback give us full name with and without path
 getFile(desc.fileId, desc.fileName, function(fileNameFull, fileName){
-	
-	if (isWin) { // For now only on windows arhitecture 
-		winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName);
+	if (isWin) { // For now only on windows arhitecture, we are using doc format and bookmarks in it
+		winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName+".doc");
 	} else {
 		var startLine2= 'open -W '+fileNameFull;  //word.app+" "+fileNameFull;
 		exec(startLine2, function callback(error, stdout, stderr){
-		    console.log("Editing done! Sending file back to server!");
+		    process.stdout.write("Editing done! Sending file back to server!");
 		    sendFile(fileNameFull, fileName, desc._id );
 		});
 	}
