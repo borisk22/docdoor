@@ -99,12 +99,21 @@ console.log(serverHost);
 // callback give us full name with and without path
 getFile(desc.fileId, desc.fileName, function(fileNameFull, fileName){
 	if (isWin) { // For now only on windows arhitecture, we are using doc format and bookmarks in it
-		winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName+".doc");
+		// winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName+".doc");
+		var startLine2= 'start/w '+fileNameDod+' '+fileNameFull;  //word.app+" "+fileNameFull;
+		exec(startLine2, function callback(error, stdout, stderr){
+		    process.stdout.write("Bookmark replacement done! Editing...");
+			var startLine3= 'start/w '+fileNameFull;  //word.app+" "+fileNameFull;
+			exec(startLine3, function callback(error, stdout, stderr){
+			    process.stdout.write("Editing done! Sending file back to server!");
+			    sendFile(fileNameFull, fileName, desc._id );
+			});
+		});
 	} else {
 		var startLine2= 'open -W '+fileNameFull;  //word.app+" "+fileNameFull;
 		exec(startLine2, function callback(error, stdout, stderr){
 		    process.stdout.write("Editing done! Sending file back to server!");
-		    sendFile(fileNameFull, fileName, desc._id );
+		    sendFile(fileNameFull, fileName+".doc", desc._id );
 		});
 	}
 })
