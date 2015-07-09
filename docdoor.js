@@ -26,14 +26,16 @@ if (isWin) {
 }
 
 // send content from fileNameFull as fileName, to file under id
-function sendFile(fileNameFull, fileName,  id){
+function sendFile(fileNameFull, fileName,  id, callback){
 	var endPoint="http://"+serverHost+":8000/producta/files/"+id; // not realy needed TODO check server side
 	var req = request.post({url: endPoint, headers:{"x-key":user, "x-access-token":token }},  function (err, resp, body) {
 		if (err) {
 			console.log('Error!:');
 			console.log(err);
+			callback();
 		} else {
 			console.log('URL: ' + body);
+			callback();
 		}
 	});
 	var form = req.form();
@@ -100,13 +102,13 @@ console.log(serverHost);
 getFile(desc.fileId, desc.fileName, function(fileNameFull, fileName){
 	if (isWin) { // For now only on windows arhitecture, we are using doc format and bookmarks in it
 		// winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName+".doc");
-		var startLine2= 'start/w '+fileNameDod+' '+fileNameFull;  //word.app+" "+fileNameFull;
+		var startLine2= 'start/w project2.exe'+fileNameDod+' '+fileNameFull;  //word.app+" "+fileNameFull;
 		exec(startLine2, function callback(error, stdout, stderr){
-		    process.stdout.write("Bookmark replacement done! Editing...");
+		    process.stdout.writeln("Bookmark replacement done! Editing...");
 			var startLine3= 'start/w '+fileNameFull;  //word.app+" "+fileNameFull;
 			exec(startLine3, function callback(error, stdout, stderr){
-			    process.stdout.write("Editing done! Sending file back to server!");
-			    sendFile(fileNameFull, fileName, desc._id );
+			    process.stdout.writeln("Editing done! Sending file back to server!");
+			    sendFile(fileNameFull, fileName, desc._id, function() { process.exit(1);} );
 			});
 		});
 	} else {
