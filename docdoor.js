@@ -104,10 +104,10 @@ getFile(desc.fileId, desc.fileName, function(fileNameFull, fileName){
 		// winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName+".doc");
 		var startLine2= 'start/w project2.exe '+fileNameDod+' '+fileNameFull;  //word.app+" "+fileNameFull;
 		exec(startLine2, function callback(error, stdout, stderr){
-		    process.stdout.writeln("Bookmark replacement done! Editing...");
+		    process.stdout.write("Bookmark replacement done! Editing...\n");
 			var startLine3= 'start/w '+fileNameFull;  //word.app+" "+fileNameFull;
 			exec(startLine3, function callback(error, stdout, stderr){
-			    process.stdout.writeln("Editing done! Sending file back to server!");
+			    process.stdout.write("Editing done! Sending file back to server!\n");
 			    sendFile(fileNameFull, fileName, desc._id, function() { process.exit(1);} );
 			});
 		});
