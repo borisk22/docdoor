@@ -34,7 +34,7 @@ function sendFile(fileNameFull, fileName,  id, callback){
 			console.log(err);
 			callback();
 		} else {
-			console.log('URL: ' + body);
+			console.log('Done!');
 			callback();
 		}
 	});
@@ -107,8 +107,8 @@ getFile(desc.fileId, desc.fileName, function(fileNameFull, fileName){
 		    process.stdout.write("Bookmark replacement done! Editing...\n");
 			var startLine3= 'start/w '+fileNameFull;  //word.app+" "+fileNameFull;
 			exec(startLine3, function callback(error, stdout, stderr){
-			    process.stdout.write("Editing done! Sending file back to server!\n");
-			    sendFile(fileNameFull, fileName+".doc", desc._id, function() { process.exit(1);} );
+			    process.stdout.write("Editing done! Sending file back to server...\n");
+			    sendFile(fileNameFull, fileName+".doc", desc._id, function() { process.exit(0);} );
 			});
 		});
 	} else {
