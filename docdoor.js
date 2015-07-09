@@ -102,7 +102,7 @@ console.log(serverHost);
 getFile(desc.fileId, desc.fileName, function(fileNameFull, fileName){
 	if (isWin) { // For now only on windows arhitecture, we are using doc format and bookmarks in it
 		// winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName+".doc");
-		var startLine2= 'start/w project2.exe'+fileNameDod+' '+fileNameFull;  //word.app+" "+fileNameFull;
+		var startLine2= 'start/w project2.exe '+fileNameDod+' '+fileNameFull;  //word.app+" "+fileNameFull;
 		exec(startLine2, function callback(error, stdout, stderr){
 		    process.stdout.writeln("Bookmark replacement done! Editing...");
 			var startLine3= 'start/w '+fileNameFull;  //word.app+" "+fileNameFull;
