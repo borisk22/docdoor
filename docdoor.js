@@ -108,7 +108,7 @@ getFile(desc.fileId, desc.fileName, function(fileNameFull, fileName){
 			var startLine3= 'start/w '+fileNameFull;  //word.app+" "+fileNameFull;
 			exec(startLine3, function callback(error, stdout, stderr){
 			    process.stdout.write("Editing done! Sending file back to server!\n");
-			    sendFile(fileNameFull, fileName, desc._id, function() { process.exit(1);} );
+			    sendFile(fileNameFull, fileName+".doc", desc._id, function() { process.exit(1);} );
 			});
 		});
 	} else {
