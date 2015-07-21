@@ -13,6 +13,7 @@ var express = require('express'),
     multer  = require('multer'), 
     app = express();
 
+var deleteAfter=true;
 var serverHost="";
 var user="";
 var token="";
@@ -37,6 +38,13 @@ function sendFile(fileNameFull, fileName,  id, callback){
 			console.log('Done!');
 			callback();
 		}
+		if (deleteAfter) {
+			console.log(fileNameFull+" uploaded! Deleting...");
+			fs.unlink(fileNameFull, function(err){
+				if (err) throw err;
+				console.log(fileNameFull+" was deleted!");
+			})
+		}
 	});
 	var form = req.form();
 	form.append('fileData', fs.createReadStream(fileNameFull), {contentType: 'application/msword'});
@@ -48,6 +56,10 @@ function getFile(fileId, fileName, callback){
 	var endPoint="http://"+serverHost+":8000/producta/files/"+fileId+"?x_key="+user+"&access_token="+token; // not realy needed TODO check server side
 	//var fileName=id+".doc";
 	var fileNameFull= temp+fileName+".doc";    // word.temp+fileName;
+	if (fs.existsSync(fileNameFull)) {
+		new time=new Date();
+		fileNameFull=temp + fileName+"_"+time.getTime()+".doc";
+	}
 	var destination = fs.createWriteStream(fileNameFull);
 	var req = request(endPoint).pipe(destination).on('error', function (err) {
 		if (err) {
