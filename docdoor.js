@@ -33,17 +33,28 @@ function sendFile(fileNameFull, fileName,  id, callback){
 		if (err) {
 			console.log('Error!:');
 			console.log(err);
-			callback();
+			if (deleteAfter) {
+				console.log(fileNameFull+" uploaded! Deleting...");
+				fs.unlink(fileNameFull, function(err){
+					if (err) throw err;
+					console.log(fileNameFull+" was deleted!");
+					callback()
+				})
+			} else {
+				callback();
+			}
 		} else {
 			console.log('Done!');
-			callback();
-		}
-		if (deleteAfter) {
-			console.log(fileNameFull+" uploaded! Deleting...");
-			fs.unlink(fileNameFull, function(err){
-				if (err) throw err;
-				console.log(fileNameFull+" was deleted!");
-			})
+			if (deleteAfter) {
+				console.log(fileNameFull+" uploaded! Deleting...");
+				fs.unlink(fileNameFull, function(err){
+					if (err) throw err;
+					console.log(fileNameFull+" was deleted!");
+					callback()
+				})
+			} else {
+				callback();
+			}
 		}
 	});
 	var form = req.form();
