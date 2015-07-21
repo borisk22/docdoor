@@ -66,11 +66,10 @@ function sendFile(fileNameFull, fileName,  id, callback){
 function getFile(fileId, fileName, callback){
 	var endPoint="http://"+serverHost+":8000/producta/files/"+fileId+"?x_key="+user+"&access_token="+token; // not realy needed TODO check server side
 	//var fileName=id+".doc";
-	var fileNameFull= temp+fileName+".doc";    // word.temp+fileName;
-	if (fs.existsSync(fileNameFull)) {
-		var time=new Date();
-		fileNameFull=temp + fileName+"_"+time.getTime()+".doc";
-	}
+	// var fileNameFull= temp+fileName+".doc";    // word.temp+fileName;
+	var time=new Date();
+	var fileNameFull=temp + fileName+"_"+time.getTime()+".doc";
+	
 	var destination = fs.createWriteStream(fileNameFull);
 	var req = request(endPoint).pipe(destination).on('error', function (err) {
 		if (err) {
