@@ -57,7 +57,7 @@ function getFile(fileId, fileName, callback){
 	//var fileName=id+".doc";
 	var fileNameFull= temp+fileName+".doc";    // word.temp+fileName;
 	if (fs.existsSync(fileNameFull)) {
-		new time=new Date();
+		var time=new Date();
 		fileNameFull=temp + fileName+"_"+time.getTime()+".doc";
 	}
 	var destination = fs.createWriteStream(fileNameFull);
