@@ -121,7 +121,7 @@ serverHost=desc.host;
 console.log(serverHost);
 // desc.fileId - id of temaplte, desc._id id of dod future document fila
 // callback give us full name with and without path
-getFile(desc.fileId, desc.fileName, function(fileNameFull, fileName){
+getFile(desc.fileId, desc.urlFriendly, function(fileNameFull, fileName){
 	if (isWin) { // For now only on windows arhitecture, we are using doc format and bookmarks in it
 		// winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName+".doc");
 		var startLine2= 'start/w project2.exe '+fileNameDod+' '+fileNameFull;  //word.app+" "+fileNameFull;
