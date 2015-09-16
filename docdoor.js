@@ -114,31 +114,39 @@ if (process.argv[1] && process.argv[1].toUpperCase().indexOf(".DOD")>0) {
 }
 
 var desc=JSON.parse(fs.readFileSync(fileNameDod, 'utf8'));
-user=desc.username;
-token=desc.token;
-value=desc.value
-serverHost=desc.host;
-console.log(serverHost);
-// desc.fileId - id of temaplte, desc._id id of dod future document fila
-// callback give us full name with and without path
-getFile(desc.fileId, desc.urlFriendly, function(fileNameFull, fileName){
-	if (isWin) { // For now only on windows arhitecture, we are using doc format and bookmarks in it
-		// winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName+".doc");
-		var startLine2= 'start/w project2.exe '+fileNameDod+' '+fileNameFull;  //word.app+" "+fileNameFull;
-		exec(startLine2, function callback(error, stdout, stderr){
-		    process.stdout.write("Bookmark replacement done! Editing...\n");
-			var startLine3= 'start/w '+fileNameFull;  //word.app+" "+fileNameFull;
-			exec(startLine3, function callback(error, stdout, stderr){
-			    process.stdout.write("Editing done! Sending file back to server...\n");
-			    sendFile(fileNameFull, desc.fileName+".doc", desc._id, function() { process.exit(0);} );
+
+if (typeof desc.type!=='undefined' && desc.type==='fs') {
+	fs.unlink(fileNameDod, function(err){
+		if (err) throw err;
+		exec("open '"+desc.path+"'");
+	})
+} else {
+	user=desc.username;
+	token=desc.token;
+	value=desc.value
+	serverHost=desc.host;
+	console.log(serverHost);
+	// desc.fileId - id of temaplte, desc._id id of dod future document fila
+	// callback give us full name with and without path
+	getFile(desc.fileId, desc.urlFriendly, function(fileNameFull, fileName){
+		if (isWin) { // For now only on windows arhitecture, we are using doc format and bookmarks in it
+			// winWordBookmarks(fileNameFull, value, Object.keys(value),0, fileName+".doc");
+			var startLine2= 'start/w project2.exe '+fileNameDod+' '+fileNameFull;  //word.app+" "+fileNameFull;
+			exec(startLine2, function callback(error, stdout, stderr){
+			    process.stdout.write("Bookmark replacement done! Editing...\n");
+				var startLine3= 'start/w '+fileNameFull;  //word.app+" "+fileNameFull;
+				exec(startLine3, function callback(error, stdout, stderr){
+				    process.stdout.write("Editing done! Sending file back to server...\n");
+				    sendFile(fileNameFull, desc.fileName+".doc", desc._id, function() { process.exit(0);} );
+				});
 			});
-		});
-	} else {
-		var startLine2= 'open -W '+fileNameFull;  //word.app+" "+fileNameFull;
-		exec(startLine2, function callback(error, stdout, stderr){
-		    process.stdout.write("Editing done! Sending file back to server!");
-		    sendFile(fileNameFull, fileName+".doc", desc._id );
-		});
-	}
-})
+		} else {
+			var startLine2= 'open -W '+fileNameFull;  //word.app+" "+fileNameFull;
+			exec(startLine2, function callback(error, stdout, stderr){
+			    process.stdout.write("Editing done! Sending file back to server!");
+			    sendFile(fileNameFull, fileName+".doc", desc._id );
+			});
+		}
+	})
+}
 
