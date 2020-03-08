@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="docDoor2.exe" version="1.0.0.3" publicKeyToken="5b4b37c4357b3fb8" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="doc-door.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="docDoor2" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="docDoor2.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="docDoor2.exe" size="394696">
+      <assemblyIdentity name="docDoor2" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>wPE9JestQ3BKCQu1YWDDV/gzA5zie+q8ORiV90aLyqM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="439280">
+      <assemblyIdentity name="Newtonsoft.Json" version="6.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Rb0XVZU8ska5Ecy98+8166zxzK8vm/xlN7ryvsvjlms=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="doc-door.ico" size="370070">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>XHdtCBmuJL47rKBWqWPucrpFoPHFj2C7gFVXHEWVUOQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="docDoor2.exe.config" size="186">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>GUHS+OFx1101tsQAmSxc2HiZ6DFfxLEUn0Es0Znho/o=</dsig:DigestValue>
+    </hash>
+  </file>
+  <fileAssociation extension=".dod" description="doc door file" progid="1" defaultIcon="doc-door.ico" xmlns="urn:schemas-microsoft-com:clickonce.v1" />
+  <fileAssociation extension=".dodz" description="doc door batch file" progid="2" defaultIcon="doc-door.ico" xmlns="urn:schemas-microsoft-com:clickonce.v1" />
+<publisherIdentity name="CN=DESKTOP-287N2VA\b" issuerKeyHash="d68f20bd3fb474f937d8e3692f6a2358923a0524" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>9/YI7HIan+Wpud34ozdgv1ZI86eNv2yDyx7HU0jQGgw=</DigestValue></Reference></SignedInfo><SignatureValue>UzfARCvJ02l4dNgby3I50Kd6AQufIsBw/aqhQvQW14Nw00bg/QPrRVPU0D8pyMkYxAYU4ls4mBQVUe8CWj8KwF0nYRRurKoVBvOeXhW9UnDu5JyC/hFeDdsmh++plgq2S+pdja8hY8NAvkLcB7lGWC9wvkipi9AfMRU+YGBI63I=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>vKakn1NJQhBr0+2u/0LdTPdMqFoBam2ZeOaQjCk9vPsi34uoyLaK8zP3VYxlgsgOvFZovJDf/bamFUvMgu/C0+ptJLxDIfiz3vUs8LrQWZULv9vhV1xrDUjp2sgJNUjoFWO7vGrPmCunll0jzj413H6TVVnYQpt/kUQLFIxswUc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="0c1ad04853c71ecb836cbf8da7f34856bf6037a3f8ddb9a9e59f1a72ec08f6f7" Description="" Url=""><as:assemblyIdentity name="docDoor2.exe" version="1.0.0.3" publicKeyToken="5b4b37c4357b3fb8" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-287N2VA\b</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>X1YVpdJWbmNVdQ3Kvxgjknm09JQli4zKxDwm0wiPUgo=</DigestValue></Reference></SignedInfo><SignatureValue>ECNdVHILQ3E9CxmmmjoXsAgD+MHbRs4uMDKhVPc3KfNuFkhJh2ukW0W23nucp6BfJ7cHhWcue5SCFsLIol6QaqeoUfahIye75379jDRHxvuO18kdEP6pgJRQXCtS+9WOritZdKQ4dp+wewR3754rSkIoI4yRFGnVVyDhZhYW9oo=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>vKakn1NJQhBr0+2u/0LdTPdMqFoBam2ZeOaQjCk9vPsi34uoyLaK8zP3VYxlgsgOvFZovJDf/bamFUvMgu/C0+ptJLxDIfiz3vUs8LrQWZULv9vhV1xrDUjp2sgJNUjoFWO7vGrPmCunll0jzj413H6TVVnYQpt/kUQLFIxswUc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB3TCCAUagAwIBAgIQSuYAdFZEW7tDyxHcWJONATANBgkqhkiG9w0BAQsFADAtMSswKQYDVQQDHiIARABFAFMASwBUAE8AUAAtADIAOAA3AE4AMgBWAEEAXABiMB4XDTIwMDMwODA1NDI0OFoXDTIxMDMwODExNDI0OFowLTErMCkGA1UEAx4iAEQARQBTAEsAVABPAFAALQAyADgANwBOADIAVgBBAFwAYjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAvKakn1NJQhBr0+2u/0LdTPdMqFoBam2ZeOaQjCk9vPsi34uoyLaK8zP3VYxlgsgOvFZovJDf/bamFUvMgu/C0+ptJLxDIfiz3vUs8LrQWZULv9vhV1xrDUjp2sgJNUjoFWO7vGrPmCunll0jzj413H6TVVnYQpt/kUQLFIxswUcCAwEAATANBgkqhkiG9w0BAQsFAAOBgQBdykVPgKH886QrkvOtbgr8bzKWmI7VsFatL2C9HFiPXQwS2YJq3YiM3n6b61BPs6n3POXEOTNA4GfQVnpkcc0BIHBn+S1eDhgnYGm2TzKSK5vl1qWGEF5kbb1CbnQa3F4m6Abx9lwV9vVfofgzz8NePpiRhhFMWkjPP3F6uumZUA==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
